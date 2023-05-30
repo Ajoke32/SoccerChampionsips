@@ -1,0 +1,8 @@
+﻿
+@model ChampWebApp.Models.Dtos.UserLoginDto;
+
+<form asp-controller=User asp-action=Login>
+    <input type=text asp-for=Email>
+    <input type=text asp-for=Password>
+    <input type=submit value=send>
+</form>
