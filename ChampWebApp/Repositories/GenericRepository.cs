@@ -15,7 +15,7 @@ public class GenericRepository<TEntity>:IGenericRepository<TEntity> where TEntit
         _context = context;
         _dbSet =context.Set<TEntity>();
     }
-
+    
     public async Task<IEnumerable<TEntity>> GetAsync(Expression<Func<TEntity, bool>>? filter = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null, int? take = null, int? skip = null,
         string includeProperties = "")
     {
@@ -100,4 +100,6 @@ public class GenericRepository<TEntity>:IGenericRepository<TEntity> where TEntit
         _context.Entry(model).State = EntityState.Modified;
         return new ValueTask<TEntity>(entity.Entity);
     }
+    
+    
 }

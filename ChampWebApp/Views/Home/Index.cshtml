@@ -2,9 +2,26 @@
 @{
     ViewData["Title"] = "Home Page";
 }
+@model IEnumerable<ChampWebApp.Models.Dtos.Display.UserDisplayDto>
 
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<script src="js/test.js" defer></script>
+<div class="filter">
+    <h4 class="title">User</h4>
+    <div class="filter-container">
+        <input type="text" name="name" id="name">
+    </div>
 </div>
+<table>
+    @foreach (var user in @Model)
+    {
+        <tr>
+            <td>@user.Name</td>
+            <td>@user.Email</td>
+            <td>@user.Role.Title</td>
+        </tr>
+    }
+</table>
+
+<button id="get">Get Data</button>
+
+

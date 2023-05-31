@@ -36,29 +36,38 @@ public class UserController:Controller
     {
         if (!ModelState.IsValid)
         {
-            return RedirectToAction("Login");
+            return View();
         }
         var searchUser = await _unitOfWork.GenericRepository<User>().FindAsync(u => u.Email == user.Email);
 
-        if (searchUser == null) return View();
+        if (searchUser == null)
+        {
+            ModelState.AddModelError("NotFound","User not found");
+            return View();
+        }
         
         var res = PasswordHelper.VerifyPassword(user.Password,
             Convert.FromBase64String(searchUser.PasswordHash),
             Convert.FromBase64String(searchUser.PasswordSalt));
-        
-        if (!res) { return View(); }
 
-        var claims = new List<Claim>()
+        if (!res)
         {
-            new Claim("Email",searchUser.Email),
-            new Claim("RoleId",searchUser.RoleId.ToString()),
-            new Claim("Name",searchUser.Name)
-        };
-        var claimsIdentity = new ClaimsIdentity(claims,
-            CookieAuthenticationDefaults.AuthenticationScheme);
+            ModelState.AddModelError("AuthError","Authorization error, check you data");
+            return View();
+        }
 
-        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
-            new ClaimsPrincipal(claimsIdentity));
+        var claimsPrincipal = new ClaimsIdentityConfig(searchUser);
+
+        try
+        {
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
+                claimsPrincipal.GetClaimsPrincipal());
+        }
+        catch (Exception e)
+        {
+            ModelState.AddModelError("SingInError","Auth error, maybe you forget allow cookie");
+            return View();
+        }
 
         return RedirectToAction("Index", "Home");
     }

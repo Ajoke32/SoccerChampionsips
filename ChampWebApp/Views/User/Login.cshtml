@@ -1,8 +1,14 @@
 ﻿
 @model ChampWebApp.Models.Dtos.UserLoginDto;
 
+@Html.ValidationMessage("AuthError","")
+
+@Html.ValidationMessage("NotFound","")
+
 <form asp-controller=User asp-action=Login>
     <input type=text asp-for=Email>
+    <span asp-validation-for=Email></span>
     <input type=text asp-for=Password>
+    <span asp-validation-for=Password></span>
     <input type=submit value=send>
 </form>
