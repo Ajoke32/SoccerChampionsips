@@ -9,33 +9,33 @@ public class Command
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
-    
-    public string Name { get; set; }
-    
-    public Country Country { get; set; }
+
+    [Required] 
+    public string Name { get; set; } = string.Empty;
+
+    public Country Country { get; set; } = null!;
     
     public int CountryId { get; set; }
-    public int UEFARanking { get; set; }
     
-    public List<Player> Players { get; set; }
+    public int UefaRanking { get; set; }
     
-    public string HomeStadium { get; set; }
+    public string? HomeStadium { get; set; }
 
-    [AllowNull]
-    public Coach Coach { get; set; }
+    public bool IsActiveCommand { get; set; } = true;
     
-    public int CoachId { get; set; }
-    
-    public StageGroup StageGroup { get; set; }
-    
-    public int StageGroupId { get; set; }
-    
-    public LeagueSummary LeagueSummary { get; set; }
-    
-    public int SummaryTableId { get; set; }
+    public Coach? Coach { get; set; }
+    public ICollection<Player> Players { get;}
+    public ICollection<StageGroup> StageGroups { get; }
+    public ICollection<LeagueSummary> LeagueSummaries { get;}
+    public ICollection<MatchEvent> MatchEvents { get;}
+    public ICollection<MatchStatistic> MatchStatistics { get;}
 
     public Command()
     {
-        UEFARanking = 0;
+        StageGroups = new List<StageGroup>();
+        LeagueSummaries = new List<LeagueSummary>();
+        MatchEvents = new List<MatchEvent>();
+        MatchStatistics = new List<MatchStatistic>();
+        Players = new List<Player>();
     }
 }

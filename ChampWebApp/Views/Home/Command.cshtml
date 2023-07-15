@@ -1,0 +1,46 @@
+﻿@model IEnumerable<GameMatch>
+
+
+
+
+
+    @foreach (var comm in @Model)
+    {
+        <div>@comm.HomeCommand.Name vs @comm.VisitCommand.Name, @comm.GameTime</div>
+
+        <table>
+            @foreach (var e in @comm.MatchEvents)
+            {
+                <tr>
+                    <td>@e.Id</td>
+                    <td>@e.Event.ToString()</td>
+                    <td>@e.Player?.FullName</td>
+                </tr>
+            }
+        </table>
+        <table>
+            <tr>
+                <td>Goals</td>
+                <td>Corners</td>
+                <td>Kicks</td>
+                <td>KicksToGoal</td>
+                <td>RedCards</td>
+                <td>YellowCards</td>
+                <td>Violations</td>
+                <td>Penalties</td>
+            </tr>
+            @foreach (var e in @comm.MatchStatistics)
+            {
+                <tr>
+                    <td>@e.Goals</td>
+                    <td>@e.Corners</td>
+                    <td>@e.Kicks</td>
+                    <td>@e.KicksToGoal</td>
+                    <td>@e.RedCards</td>
+                    <td>@e.YellowCards</td>
+                    <td>@e.Violations</td>
+                    <td>@e.Penalties</td>
+                </tr>
+            }
+        </table>
+    }

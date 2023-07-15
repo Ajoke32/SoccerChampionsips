@@ -1,13 +1,21 @@
-﻿
-@using Microsoft.AspNetCore.Mvc.TagHelpers
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
 @model ChampWebApp.Models.Dtos.UserRegisterDto;
 
-<form asp-action=Register asp-controller=User>
-    <input type=text asp-for=Name placeholder=Name>
-    <span asp-validation-for=Name></span>
-    <input type=text asp-for=Email placeholder=Email>
-    <span asp-validation-for=Email></span>
-    <input type=text asp-for=Password placeholder=Password>
-    <span asp-validation-for=Password></span>
-    <input type=submit value=send>
+
+<form asp-action="Register" asp-controller="User" class="row justify-content-center" style="margin:180px auto; width:40%">
+    <div class="mb-3">
+        <input type="text" placeholder="Enter you name" asp-for="Name" id="inputPassword5" class="form-control" aria-labelledby="passwordHelpBlock">
+        <div id="passwordHelpBlock" class="form-text">
+            <span asp-validation-for="Name"></span>
+        </div>
+        <input type="password" placeholder="Password" asp-for="Password" class="form-control">
+        <div class="form-text">
+            <span asp-validation-for="Password"></span>
+        </div>
+        <input type="text" placeholder="Email" asp-for="Email" class="form-control">
+        <div class="form-text">
+            <span asp-validation-for="Email"></span>
+        </div>
+        <button type="submit" class="btn btn-primary form-control mt-3">Sent</button>
+    </div>
 </form>

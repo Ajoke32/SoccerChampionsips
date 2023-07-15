@@ -16,7 +16,8 @@ public class GenericRepository<TEntity>:IGenericRepository<TEntity> where TEntit
         _dbSet =context.Set<TEntity>();
     }
     
-    public async Task<IEnumerable<TEntity>> GetAsync(Expression<Func<TEntity, bool>>? filter = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null, int? take = null, int? skip = null,
+    public async Task<IEnumerable<TEntity>> GetAsync(Expression<Func<TEntity, bool>>? filter = null,
+        Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null, int? take = null, int? skip = null,
         string includeProperties = "")
     {
         IQueryable<TEntity> query = _dbSet;
@@ -31,6 +32,7 @@ public class GenericRepository<TEntity>:IGenericRepository<TEntity> where TEntit
             {
                 query = query.Include(includeProperty);
             }
+            
 
             if (orderBy != null)
             {

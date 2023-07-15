@@ -1,7 +1,13 @@
-﻿namespace ChampWebApp.Models;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-public abstract class People
+namespace ChampWebApp.Models;
+
+public class People
 {
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int Id { get; set; }
     public string FirstName { get; set; }
 
     public string SecondName { get; set; }
@@ -10,9 +16,8 @@ public abstract class People
 
     public string FullName => $"{FirstName} {SecondName}";
     
+    [ForeignKey("CountryId")]
     public Country Country { get; set; }
-    
-    public int CountryId { get; set; }
     
     private int _age;
     
@@ -28,8 +33,11 @@ public abstract class People
         }
     }
 
+    [Required]
     public DateTime DateOfBirth { get; set; }
     
+    [ForeignKey("CommandId")]
+    public Command? Command { get; set; }
     
     public People()
     {

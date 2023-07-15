@@ -68,7 +68,7 @@ public class UserController:Controller
             ModelState.AddModelError("SingInError","Auth error, maybe you forget allow cookie");
             return View();
         }
-
+        
         return RedirectToAction("Index", "Home");
     }
 
@@ -102,5 +102,11 @@ public class UserController:Controller
             CookieAuthenticationDefaults.AuthenticationScheme);
 
         return RedirectToAction("Index", "Home");
+    }
+    
+    [Authorize]
+    public IActionResult Permissions()
+    {
+        return View();
     }
 }

@@ -14,7 +14,8 @@ public class ClaimsIdentityConfig
         {
             new Claim("Email",user.Email),
             new Claim("RoleId",user.RoleId.ToString()),
-            new Claim("Name",user.Name)
+            new Claim("Name",user.Name),
+            new Claim("Permissions",Convert.ToInt32(user.Permissions).ToString())
         };
     }
     public ClaimsPrincipal GetClaimsPrincipal()

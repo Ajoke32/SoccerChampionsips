@@ -4,7 +4,7 @@ namespace ChampWebApp.Repositories;
 
 public class RepositoryFactory : IRepositoryFactory
 {
-    private Dictionary<Type, object> _repos = new Dictionary<Type, object>();
+    private readonly Dictionary<Type, object> _repos = new Dictionary<Type, object>();
     
     public IGenericRepository<T> Instance<T>(object dbContext) where T : class
     {

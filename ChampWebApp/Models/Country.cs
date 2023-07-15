@@ -8,8 +8,13 @@ public class Country
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
+
+    public string Name { get; set; } = string.Empty;
     
-    public string Name { get; set; }
-    
-    public List<People> Peoples { get; set; }
+    public ICollection<People> Peoples { get;}
+
+    public Country()
+    {
+        Peoples = new List<People>();
+    }
 }

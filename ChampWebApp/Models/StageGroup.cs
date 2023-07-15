@@ -9,12 +9,11 @@ public class StageGroup
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
     
-    public string Name { get; set; } 
-    
-    public List<Command> Commands { get; set; }
+    public string? Name { get; set; }
 
-    public Tournament Tournament { get; set; }
+    [ForeignKey("CommandId")]
+    public Command Command { get; set; } = null!;
 
-    public int? ChampionshipId { get; set; }
-    
+    [ForeignKey("TournamentId")]
+    public Tournament Tournament { get; set; } = null!;
 }

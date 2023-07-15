@@ -1,0 +1,606 @@
+﻿schema {
+  query: RootQuery
+  mutation: RootMutation
+}
+
+type RootQuery {
+  coachQuery: CoachQuery
+  userQuery: UserQuery
+  commandQuery: CommandQuery
+  champQuery: ChampsQuery
+}
+
+type RootMutation {
+  countryMutation: CountryMutation
+  champMutation: ChampsMutation
+}
+
+type CoachQuery {
+  coaches("Returns the first _n_ elements from the list." first: Int "Returns the elements in the list that come after the specified cursor." after: String "Returns the last _n_ elements from the list." last: Int "Returns the elements in the list that come before the specified cursor." before: String where: CoachFilterInput): CoachesConnection
+  coach(id: Int!): Coach
+}
+
+type UserQuery {
+  users(where: UserDisplayDtoFilterInput): [UserDisplayDto!]!
+}
+
+type CommandQuery {
+  commands("Returns the first _n_ elements from the list." first: Int "Returns the elements in the list that come after the specified cursor." after: String "Returns the last _n_ elements from the list." last: Int "Returns the elements in the list that come before the specified cursor." before: String order: [CommandSortInput!] where: CommandFilterInput): CommandsConnection
+}
+
+type ChampsQuery {
+  champs(where: TournamentFilterInput): [Tournament!]!
+}
+
+type CountryMutation {
+  createCountry(name: String!): Country!
+}
+
+type ChampsMutation {
+  createTournament(name: String!): Tournament!
+}
+
+input CoachFilterInput {
+  and: [CoachFilterInput!]
+  or: [CoachFilterInput!]
+  rank: IntOperationFilterInput
+  id: IntOperationFilterInput
+  firstName: StringOperationFilterInput
+  secondName: StringOperationFilterInput
+  imgLink: StringOperationFilterInput
+  fullName: StringOperationFilterInput
+  country: CountryFilterInput
+  age: IntOperationFilterInput
+  dateOfBirth: DateTimeOperationFilterInput
+  command: CommandFilterInput
+}
+
+"A connection to a list of items."
+type CoachesConnection {
+  "Information to aid in pagination."
+  pageInfo: PageInfo!
+  "A list of edges."
+  edges: [CoachesEdge!]
+  "A flattened list of the nodes."
+  nodes: [Coach]
+}
+
+input UserDisplayDtoFilterInput {
+  and: [UserDisplayDtoFilterInput!]
+  or: [UserDisplayDtoFilterInput!]
+  name: StringOperationFilterInput
+  email: StringOperationFilterInput
+  role: RoleFilterInput
+}
+
+input CommandSortInput {
+  country_name: SortEnumType
+  coach_name: SortEnumType
+  id: SortEnumType
+  name: SortEnumType
+  country: CountrySortInput
+  countryId: SortEnumType
+  uefaRanking: SortEnumType
+  homeStadium: SortEnumType
+  isActiveCommand: SortEnumType
+  coach: CoachSortInput
+}
+
+input CommandFilterInput {
+  and: [CommandFilterInput!]
+  or: [CommandFilterInput!]
+  country_name: StringOperationFilterInput
+  coach_name: StringOperationFilterInput
+  id: IntOperationFilterInput
+  name: StringOperationFilterInput
+  country: CountryFilterInput
+  countryId: IntOperationFilterInput
+  uefaRanking: IntOperationFilterInput
+  homeStadium: StringOperationFilterInput
+  isActiveCommand: BooleanOperationFilterInput
+  coach: CoachFilterInput
+  players: ListFilterInputTypeOfPlayerFilterInput
+  stageGroups: ListFilterInputTypeOfStageGroupFilterInput
+  leagueSummaries: ListFilterInputTypeOfLeagueSummaryFilterInput
+  matchEvents: ListFilterInputTypeOfMatchEventFilterInput
+  matchStatistics: ListFilterInputTypeOfMatchStatisticFilterInput
+}
+
+"A connection to a list of items."
+type CommandsConnection {
+  "Information to aid in pagination."
+  pageInfo: PageInfo!
+  "A list of edges."
+  edges: [CommandsEdge!]
+  "A flattened list of the nodes."
+  nodes: [Command]
+}
+
+input TournamentFilterInput {
+  and: [TournamentFilterInput!]
+  or: [TournamentFilterInput!]
+  id: IntOperationFilterInput
+  name: StringOperationFilterInput
+  stageGroups: ListFilterInputTypeOfStageGroupFilterInput
+  leagueSummaries: ListFilterInputTypeOfLeagueSummaryFilterInput
+}
+
+input IntOperationFilterInput {
+  eq: Int
+  neq: Int
+  in: [Int]
+  nin: [Int]
+  gt: Int
+  ngt: Int
+  gte: Int
+  ngte: Int
+  lt: Int
+  nlt: Int
+  lte: Int
+  nlte: Int
+}
+
+input StringOperationFilterInput {
+  and: [StringOperationFilterInput!]
+  or: [StringOperationFilterInput!]
+  eq: String
+  neq: String
+  contains: String
+  ncontains: String
+  in: [String]
+  nin: [String]
+  startsWith: String
+  nstartsWith: String
+  endsWith: String
+  nendsWith: String
+}
+
+input CountryFilterInput {
+  and: [CountryFilterInput!]
+  or: [CountryFilterInput!]
+  id: IntOperationFilterInput
+  name: StringOperationFilterInput
+  peoples: ListFilterInputTypeOfPeopleFilterInput
+}
+
+input DateTimeOperationFilterInput {
+  eq: DateTime
+  neq: DateTime
+  in: [DateTime]
+  nin: [DateTime]
+  gt: DateTime
+  ngt: DateTime
+  gte: DateTime
+  ngte: DateTime
+  lt: DateTime
+  nlt: DateTime
+  lte: DateTime
+  nlte: DateTime
+}
+
+"Information about pagination in a connection."
+type PageInfo {
+  "Indicates whether more edges exist following the set defined by the clients arguments."
+  hasNextPage: Boolean!
+  "Indicates whether more edges exist prior the set defined by the clients arguments."
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+}
+
+"An edge in a connection."
+type CoachesEdge {
+  "A cursor for use in pagination."
+  cursor: String!
+  "The item at the end of the edge."
+  node: Coach
+}
+
+input RoleFilterInput {
+  and: [RoleFilterInput!]
+  or: [RoleFilterInput!]
+  id: IntOperationFilterInput
+  title: StringOperationFilterInput
+  code: IntOperationFilterInput
+  users: ListFilterInputTypeOfUserFilterInput
+}
+
+enum SortEnumType {
+  ASC
+  DESC
+}
+
+input CountrySortInput {
+  id: SortEnumType
+  name: SortEnumType
+}
+
+input CoachSortInput {
+  rank: SortEnumType
+  id: SortEnumType
+  firstName: SortEnumType
+  secondName: SortEnumType
+  imgLink: SortEnumType
+  fullName: SortEnumType
+  country: CountrySortInput
+  age: SortEnumType
+  dateOfBirth: SortEnumType
+  command: CommandSortInput
+}
+
+input BooleanOperationFilterInput {
+  eq: Boolean
+  neq: Boolean
+}
+
+input ListFilterInputTypeOfPlayerFilterInput {
+  all: PlayerFilterInput
+  none: PlayerFilterInput
+  some: PlayerFilterInput
+  any: Boolean
+}
+
+input ListFilterInputTypeOfStageGroupFilterInput {
+  all: StageGroupFilterInput
+  none: StageGroupFilterInput
+  some: StageGroupFilterInput
+  any: Boolean
+}
+
+input ListFilterInputTypeOfLeagueSummaryFilterInput {
+  all: LeagueSummaryFilterInput
+  none: LeagueSummaryFilterInput
+  some: LeagueSummaryFilterInput
+  any: Boolean
+}
+
+input ListFilterInputTypeOfMatchEventFilterInput {
+  all: MatchEventFilterInput
+  none: MatchEventFilterInput
+  some: MatchEventFilterInput
+  any: Boolean
+}
+
+input ListFilterInputTypeOfMatchStatisticFilterInput {
+  all: MatchStatisticFilterInput
+  none: MatchStatisticFilterInput
+  some: MatchStatisticFilterInput
+  any: Boolean
+}
+
+"An edge in a connection."
+type CommandsEdge {
+  "A cursor for use in pagination."
+  cursor: String!
+  "The item at the end of the edge."
+  node: Command
+}
+
+input ListFilterInputTypeOfPeopleFilterInput {
+  all: PeopleFilterInput
+  none: PeopleFilterInput
+  some: PeopleFilterInput
+  any: Boolean
+}
+
+"The `DateTime` scalar represents an ISO-8601 compliant date time type."
+scalar DateTime
+
+input ListFilterInputTypeOfUserFilterInput {
+  all: UserFilterInput
+  none: UserFilterInput
+  some: UserFilterInput
+  any: Boolean
+}
+
+input PlayerFilterInput {
+  and: [PlayerFilterInput!]
+  or: [PlayerFilterInput!]
+  marketPrice: DecimalOperationFilterInput
+  foot: StringOperationFilterInput
+  position: StringOperationFilterInput
+  height: IntOperationFilterInput
+  weight: IntOperationFilterInput
+  clubNumber: IntOperationFilterInput
+  matchEvents: ListFilterInputTypeOfMatchEventFilterInput
+  id: IntOperationFilterInput
+  firstName: StringOperationFilterInput
+  secondName: StringOperationFilterInput
+  imgLink: StringOperationFilterInput
+  fullName: StringOperationFilterInput
+  country: CountryFilterInput
+  age: IntOperationFilterInput
+  dateOfBirth: DateTimeOperationFilterInput
+  command: CommandFilterInput
+}
+
+input StageGroupFilterInput {
+  and: [StageGroupFilterInput!]
+  or: [StageGroupFilterInput!]
+  id: IntOperationFilterInput
+  name: StringOperationFilterInput
+  command: CommandFilterInput
+  tournament: TournamentFilterInput
+}
+
+input LeagueSummaryFilterInput {
+  and: [LeagueSummaryFilterInput!]
+  or: [LeagueSummaryFilterInput!]
+  id: IntOperationFilterInput
+  matchesPlayed: IntOperationFilterInput
+  wins: IntOperationFilterInput
+  draws: IntOperationFilterInput
+  loses: IntOperationFilterInput
+  goalsFor: IntOperationFilterInput
+  goalsAgainst: IntOperationFilterInput
+  goalsDifference: IntOperationFilterInput
+  command: CommandFilterInput
+  tournament: TournamentFilterInput
+}
+
+input MatchEventFilterInput {
+  and: [MatchEventFilterInput!]
+  or: [MatchEventFilterInput!]
+  id: IntOperationFilterInput
+  event: EventOperationFilterInput
+  player: PlayerFilterInput
+  command: CommandFilterInput
+  gameMatch: GameMatchFilterInput
+}
+
+input MatchStatisticFilterInput {
+  and: [MatchStatisticFilterInput!]
+  or: [MatchStatisticFilterInput!]
+  id: IntOperationFilterInput
+  gameMatch: GameMatchFilterInput
+  command: CommandFilterInput
+  goals: IntOperationFilterInput
+  redCards: IntOperationFilterInput
+  yellowCards: IntOperationFilterInput
+  kicks: IntOperationFilterInput
+  kicksToGoal: IntOperationFilterInput
+  penalties: IntOperationFilterInput
+  violations: IntOperationFilterInput
+  corners: IntOperationFilterInput
+}
+
+input PeopleFilterInput {
+  and: [PeopleFilterInput!]
+  or: [PeopleFilterInput!]
+  id: IntOperationFilterInput
+  firstName: StringOperationFilterInput
+  secondName: StringOperationFilterInput
+  imgLink: StringOperationFilterInput
+  fullName: StringOperationFilterInput
+  country: CountryFilterInput
+  age: IntOperationFilterInput
+  dateOfBirth: DateTimeOperationFilterInput
+  command: CommandFilterInput
+}
+
+input UserFilterInput {
+  and: [UserFilterInput!]
+  or: [UserFilterInput!]
+  id: IntOperationFilterInput
+  name: StringOperationFilterInput
+  email: StringOperationFilterInput
+  passwordHash: StringOperationFilterInput
+  passwordSalt: StringOperationFilterInput
+  roleId: IntOperationFilterInput
+  permissions: PermissionsOperationFilterInput
+  role: RoleFilterInput
+}
+
+input DecimalOperationFilterInput {
+  eq: Decimal
+  neq: Decimal
+  in: [Decimal]
+  nin: [Decimal]
+  gt: Decimal
+  ngt: Decimal
+  gte: Decimal
+  ngte: Decimal
+  lt: Decimal
+  nlt: Decimal
+  lte: Decimal
+  nlte: Decimal
+}
+
+input EventOperationFilterInput {
+  eq: Event
+  neq: Event
+  in: [Event!]
+  nin: [Event!]
+}
+
+input GameMatchFilterInput {
+  and: [GameMatchFilterInput!]
+  or: [GameMatchFilterInput!]
+  id: IntOperationFilterInput
+  homeCommand: CommandFilterInput
+  visitCommand: CommandFilterInput
+  gameTime: DateTimeOperationFilterInput
+  tournament: TournamentFilterInput
+  matchStatistics: ListFilterInputTypeOfMatchStatisticFilterInput
+  matchEvents: ListFilterInputTypeOfMatchEventFilterInput
+}
+
+input PermissionsOperationFilterInput {
+  eq: Permissions
+  neq: Permissions
+  in: [Permissions!]
+  nin: [Permissions!]
+}
+
+"The built-in `Decimal` scalar type."
+scalar Decimal
+
+enum Event {
+  GOAL
+  RED_CARD
+  YELLOW_CARD
+  KICK
+  KICK_TO_GOAL
+  PENALTY
+  VIOLATION
+  CORNER
+}
+
+type Command {
+  id: Int!
+  name: String!
+  country: Country!
+  countryId: Int!
+  uefaRanking: Int!
+  homeStadium: String
+  isActiveCommand: Boolean!
+  coach: Coach
+  players: [Player!]!
+  stageGroups: [StageGroup!]!
+  leagueSummaries: [LeagueSummary!]!
+  matchEvents: [MatchEvent!]!
+  matchStatistics: [MatchStatistic!]!
+}
+
+type Country {
+  id: Int!
+  name: String!
+  peoples: [People!]!
+}
+
+type Tournament {
+  id: Int!
+  name: String!
+  stageGroups: [StageGroup!]!
+  leagueSummaries: [LeagueSummary!]!
+}
+
+type UserDisplayDto {
+  name: String!
+  email: String!
+  role: Role!
+}
+
+type Coach {
+  rank: Int!
+  id: Int!
+  firstName: String!
+  secondName: String!
+  imgLink: String!
+  fullName: String!
+  country: Country!
+  age: Int!
+  dateOfBirth: DateTime!
+  command: Command
+}
+
+enum Permissions {
+  NONE
+  CREATE
+  UPDATE
+  DELETE
+  READ
+}
+
+type Role {
+  id: Int!
+  title: String!
+  code: Int!
+  users: [User!]!
+}
+
+type People {
+  id: Int!
+  firstName: String!
+  secondName: String!
+  imgLink: String!
+  fullName: String!
+  country: Country!
+  age: Int!
+  dateOfBirth: DateTime!
+  command: Command
+}
+
+type MatchStatistic {
+  id: Int!
+  gameMatch: GameMatch!
+  command: Command!
+  goals: Int
+  redCards: Int
+  yellowCards: Int
+  kicks: Int
+  kicksToGoal: Int
+  penalties: Int
+  violations: Int
+  corners: Int
+}
+
+type MatchEvent {
+  id: Int!
+  event: Event!
+  player: Player
+  command: Command!
+  gameMatch: GameMatch!
+}
+
+type LeagueSummary {
+  id: Int!
+  matchesPlayed: Int
+  wins: Int
+  draws: Int
+  loses: Int
+  goalsFor: Int
+  goalsAgainst: Int
+  goalsDifference: Int
+  command: Command!
+  tournament: Tournament!
+}
+
+type StageGroup {
+  id: Int!
+  name: String
+  command: Command!
+  tournament: Tournament!
+}
+
+type Player {
+  marketPrice: Decimal!
+  foot: String!
+  position: String!
+  height: Int
+  weight: Int
+  clubNumber: Int!
+  matchEvents: [MatchEvent!]!
+  id: Int!
+  firstName: String!
+  secondName: String!
+  imgLink: String!
+  fullName: String!
+  country: Country!
+  age: Int!
+  dateOfBirth: DateTime!
+  command: Command
+}
+
+type GameMatch {
+  id: Int!
+  homeCommand: Command!
+  visitCommand: Command!
+  gameTime: DateTime
+  tournament: Tournament!
+  matchStatistics: [MatchStatistic!]!
+  matchEvents: [MatchEvent!]!
+}
+
+type User {
+  id: Int!
+  name: String!
+  email: String!
+  passwordHash: String!
+  passwordSalt: String!
+  roleId: Int!
+  permissions: Permissions!
+  role: Role!
+}

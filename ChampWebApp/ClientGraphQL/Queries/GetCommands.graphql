@@ -1,0 +1,34 @@
+﻿
+query GetCommands($first:Int,$after:String,$before:String,$last:Int){
+    commandQuery {
+        commands(first: $first,after:$after,before: $before,last:$last) {
+            edges{
+                node {
+                    ...CommandFragment
+                }
+            },
+            pageInfo {
+                ...PageFragment
+            }
+        }
+    }
+}
+
+fragment CommandFragment on Command{
+    name,
+    uefaRanking,
+    country {
+      name   
+    }
+    coach {
+        fullName
+    }
+}
+
+fragment PageFragment on PageInfo{
+    endCursor,
+    hasNextPage,
+    hasPreviousPage,
+    startCursor
+}
+

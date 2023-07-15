@@ -1,0 +1,26 @@
+﻿@model ChampWebApp.Models.Dtos.Input.CommandInputDto
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success" id="success">@TempData["SuccessMessage"]</div>
+}
+
+<form asp-action="Create" asp-controller="Command" class="col-form" id="form">
+    <input type="text" class="input" asp-for="Name" autocomplete="off" placeholder="Command name">
+    <input type="number" class="input" asp-for="UefaRanking" autocomplete="off" placeholder="Uefa Ranking">
+    <input type="text" class="input" asp-for="HomeStadium" autocomplete="off" placeholder="Home Stadium">
+    @await Component.InvokeAsync("CountryList")
+    <div>
+        <span class="btn btn-light">Coach:</span>
+        <span id="selected-coach" class="btn btn-light">Not selected</span>
+        <button type="button" id="browse" class="btn btn-warning text-decoration-none">Browse coaches</button>
+    </div>
+    <input type="hidden" name="CoachId">
+    <input type='submit' value="create" class="btn btn-primary text-decoration-none">
+</form>
+
+
+<div class="coach-menu" id="coach-menu"></div>
+
+<script src="~/js/coachMenu.js" defer></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" defer>

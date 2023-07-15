@@ -1,0 +1,7 @@
+﻿@using ChampWebApp.Views.Shared.Components
+@model Tournament
+
+
+<div class="center" style="text-align: center">
+    @(await Html.RenderComponentAsync<TournamentInfo>(RenderMode.ServerPrerendered, new {Tournament=Model}))
+</div>

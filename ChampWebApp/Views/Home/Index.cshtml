@@ -1,27 +1,10 @@
 ﻿
+@using ChampWebApp.Views.Shared.Components
 @{
     ViewData["Title"] = "Home Page";
 }
-@model IEnumerable<ChampWebApp.Models.Dtos.Display.UserDisplayDto>
+<h1>Home page</h1>
 
-<script src="js/test.js" defer></script>
-<div class="filter">
-    <h4 class="title">User</h4>
-    <div class="filter-container">
-        <input type="text" name="name" id="name">
-    </div>
+<div class="center">
+    @(await Html.RenderComponentAsync<ChampsList>(RenderMode.ServerPrerendered))
 </div>
-<table>
-    @foreach (var user in @Model)
-    {
-        <tr>
-            <td>@user.Name</td>
-            <td>@user.Email</td>
-            <td>@user.Role.Title</td>
-        </tr>
-    }
-</table>
-
-<button id="get">Get Data</button>
-
-

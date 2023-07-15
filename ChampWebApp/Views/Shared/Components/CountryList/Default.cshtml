@@ -1,0 +1,11 @@
+﻿@model IEnumerable<Country>
+
+
+
+<select name="CountryId" id="CountryId" class="input">
+    @foreach (var c in @Model)
+    {
+        <option value="@c.Id">@c.Name</option>
+    }
+</select>
+    

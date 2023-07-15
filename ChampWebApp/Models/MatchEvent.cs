@@ -21,17 +21,15 @@ public class MatchEvent
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
-
-    [AllowNull]
+    
     [Column(TypeName = "int")]
     public Event Event { get; set; }
 
-    public Player Player { get; set; }
-    
-    public int PlayerId { get; set; }
-    
-    public GameMatch GameMatch { get; set; }
-    
-    public int MatchId { get; set; }
-    
+    [ForeignKey("PlayerId")]
+    public Player? Player { get; set; }
+
+    [ForeignKey("CommandId")] public Command Command { get; set; } = null!;
+
+    [ForeignKey("GameMatchId")] public GameMatch GameMatch { get; set; } = null!;
+
 }

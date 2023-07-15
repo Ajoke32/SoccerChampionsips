@@ -1,0 +1,16 @@
+﻿
+.filter-wrapper{
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.hover-green:hover{
+    transition: 0.2s;
+    color:lawngreen;
+}
+.hover-blue:hover{
+    transition: 0.2s;
+    color:cornflowerblue;
+}

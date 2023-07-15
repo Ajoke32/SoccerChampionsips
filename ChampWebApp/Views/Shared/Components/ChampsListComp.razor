@@ -1,0 +1,39 @@
+﻿@using ChampWebApp.Models
+@using ChampWebApp.ClientGraphQL
+
+@{
+    var Tool = (new List<string>() { "Search" });
+}
+
+<SfGrid DataSource="Tournaments" AllowPaging="true" AllowFiltering="true" AllowSorting="true" Toolbar="@Tool">
+    <GridPageSettings PageSize="5"></GridPageSettings>
+    <GridFilterSettings Type="FilterType.Menu"></GridFilterSettings>
+    <GridTemplates>
+        <DetailTemplate Context="emp">
+            @{
+                var item = (GetChampionships_ChampQuery_Champs_Tournament)emp;
+                <button style="width: 100%;border: 1px solid lightblue;border-radius: 5px;cursor: pointer;background-color: #0d6efd;">
+                    <a href="/Champ/Info/@item.Id" style="text-decoration: none;color: white;width: 100%;">More info</a>
+                </button>
+            }
+        </DetailTemplate>
+    </GridTemplates>
+    <GridColumns>
+        <GridColumn Field="@nameof(Tournament.Name)" HeaderText="Championships"
+                    TextAlign="TextAlign.Center" Width="120">
+        </GridColumn>
+        
+    </GridColumns>
+
+</SfGrid>
+
+@code{
+
+    [Parameter]
+    public IReadOnlyList<ClientGraphQL.IGetChampionships_ChampQuery_Champs> Tournaments { get; set; }
+
+    protected override void OnInitialized()
+    {
+    }
+
+}

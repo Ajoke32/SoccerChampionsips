@@ -4,14 +4,12 @@ namespace ChampWebApp.Models.Dtos;
 
 public class UserRegisterDto
 {
-    public string Name { get; set; }
-    
-    [Required]
-    [MinLength(7)]
-    public string Password { get; set; }
-    
+    public string? Name { get; set; }
+
+    [Required] [MinLength(7)] public string Password { get; set; } = null!;
+
     [Required]
     [MinLength(5)]
     [EmailAddress]
-    public string Email { get; set; }
+    public string Email { get; set; } = null!;
 }

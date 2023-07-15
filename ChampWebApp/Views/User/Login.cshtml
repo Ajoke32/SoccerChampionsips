@@ -5,10 +5,17 @@
 
 @Html.ValidationMessage("NotFound","")
 
-<form asp-controller=User asp-action=Login>
-    <input type=text asp-for=Email>
-    <span asp-validation-for=Email></span>
-    <input type=text asp-for=Password>
-    <span asp-validation-for=Password></span>
-    <input type=submit value=send>
+
+<form asp-action="Login" asp-controller="User" class="row justify-content-center" style="margin:180px auto;width: 40%;">
+    <div class="mb-5">
+        <input type="text" placeholder="You email" class="form-control" asp-for="Email">
+        <div class="form-text">
+            <span asp-validation-for="Email"></span>
+        </div>
+        <input type="password" placeholder="You password" class="form-control" asp-for="Password">
+                <div class="form-text">
+                    <span asp-validation-for="Password"></span>
+                </div>
+        <button type="submit" class="btn btn-primary form-control mt-3">Login</button>
+    </div>
 </form>

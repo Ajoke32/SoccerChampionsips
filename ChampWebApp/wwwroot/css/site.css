@@ -20,3 +20,53 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+table{
+  border-collapse: collapse;
+}
+td,th{
+  padding: 5px 10px;
+  border:1px solid lightblue;
+  text-align: center;
+}
+
+.coach-menu{
+  padding: 10px;
+  border-radius: 3px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0 2px 8px 0;
+  position: absolute;
+  left: calc(50% - 300px);
+  min-width: 600px;
+  top:15%;
+  background-color: aliceblue;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  display: none;
+}
+.coach-item{
+  display: flex;
+  align-items: center;
+  justify-content:space-between;
+  width:45%
+}
+.input{
+  outline: none;
+  border-radius: 5px;
+  border: 1px solid lightgray;
+  padding: 3px;
+}
+.input:active,.input:hover{
+  box-shadow: #abc4ff 0 1px 4px;
+}
+.col-form{
+  margin: 80px auto;
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap:15px;
+}
+
+.clickable{
+  cursor: pointer;
+}

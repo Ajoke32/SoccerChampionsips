@@ -1,0 +1,8 @@
+﻿
+query GetChampionships{
+    champQuery {
+        champs{
+            id,name
+        }
+    }
+}

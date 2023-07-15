@@ -1,0 +1,57 @@
+﻿@startuml
+
+interface IGenericRepository<TEntity>
+{
+    public Task<IEnumerable<TEntity>> GetAsync(Expression<Func<TEntity, bool>>? filter = null,
+        Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null, int? take = null, int? skip = null,
+        string includeProperties = "");
+
+    public Task<TEntity?> FindAsync(Expression<Func<TEntity, bool>> func, string? relatedData = null);
+
+    public ValueTask<TEntity> CreateAsync(TEntity model);
+
+    public Task<bool> DeleteAsync(TEntity entity);
+
+    public ValueTask<TEntity> UpdateAsync(TEntity model);
+}
+
+GenericRepository <|-- IGenericRepository
+
+class GenericRepository<TEntity>
+{
+     {method} Task<IEnumerable<TEntity>> GetAsync(Expression<Func<TEntity, bool>>? filter = null,
+                      Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null, int? take = null, int? skip = null,
+                      string includeProperties = "")
+     {method} Task<TEntity?> FindAsync(Expression<Func<TEntity, bool>> func, string? relatedData = null);
+     {method} ValueTask<TEntity> CreateAsync(TEntity model);
+     {method} Task<bool> DeleteAsync(TEntity entity);
+     {method} ValueTask<TEntity> UpdateAsync(TEntity model);
+}
+
+interface IRepositoryFactory
+{
+    public IGenericRepository<T> Instance<T>(object dbContext) where T:class;
+}
+
+RepositoryFactory <|-- IRepositoryFactory
+
+class RepositoryFactory
+{
+    {method} IGenericRepository<T> Instance<T>(object dbContext)
+}
+
+interface IUnitOfWorkRepository
+{
+    public IGenericRepository<T> GenericRepository<T>() where T : class;
+    Task SaveAsync();
+}
+
+UnitOfWorkRepository <|-- IUnitOfWorkRepository
+
+class UnitOfWorkRepository
+{
+    {method}  IGenericRepository<T> GenericRepository<T>()
+    {method}  SaveAsync()
+}
+
+@enduml

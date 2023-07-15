@@ -1,0 +1,13 @@
+﻿query GetCoaches{
+    coachQuery {
+        coaches{
+            edges {
+               node {
+                   fullName,
+                   secondName,
+                   age
+               }
+            }
+        }
+    }
+}

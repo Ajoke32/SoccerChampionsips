@@ -1,0 +1,13 @@
+﻿@model Tournament
+
+
+<form asp-action="Create" asp-controller="Champ" class="row justify-content-center" style="margin:180px auto;">
+    <div class="col-auto">
+        <input type="text" placeholder="Tournament name" id="inputPassword5" class="form-control" aria-labelledby="passwordHelpBlock">
+        <div id="passwordHelpBlock" class="form-text">
+            <span asp-validation-for="Name"></span>
+        </div>
+        <button type="submit" class="btn btn-primary form-control mt-3">Create</button>
+         <a href="" class="btn btn-secondary mt-3 form-control">Add commands to this tournament</a>
+    </div>
+</form>

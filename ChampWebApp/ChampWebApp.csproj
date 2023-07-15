@@ -12,16 +12,24 @@
     <PackageReference Include="HotChocolate.AspNetCore" Version="13.1.0" />
     <PackageReference Include="HotChocolate.Data" Version="13.1.0" />
     <PackageReference Include="HotChocolate.Data.EntityFramework" Version="13.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components" Version="7.0.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="7.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.5">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.5">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="StrawberryShake.Blazor" Version="13.2.1" />
+    <PackageReference Include="Syncfusion.Blazor" Version="22.1.38" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="GraphQl\Mutations\" />
+    <Folder Include="ClientGraphQL\Mutations\" />
     <Folder Include="GraphQl\Schemes\" />
     <Folder Include="Utils\Login\" />
   </ItemGroup>

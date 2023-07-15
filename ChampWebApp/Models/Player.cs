@@ -1,30 +1,27 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Diagnostics.CodeAnalysis;
+using Microsoft.EntityFrameworkCore;
 
 namespace ChampWebApp.Models;
 
-public class Player : SoccerPeople
+public class Player : People
 {
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int Id { get; set; }
-    
+
     [Required]
+    [Precision(15,2)]
     public decimal MarketPrice { get; set; }
+
+    [Required] public string Foot { get; set; } = string.Empty;
+
+    [Required] public string Position { get; set; } = string.Empty;
     
-    [Required]
-    public string Foot { get; set; }
+    public int? Height { get; set; }
     
-    [Required]
-    public string Position { get; set; }
-    
-    [AllowNull]
-    public int Height { get; set; }
-    
-    [AllowNull]
-    public int Weight { get; set; }
+
+    public int? Weight { get; set; }
     
     [Required]
     public int ClubNumber { get; set; }
+
+    public List<MatchEvent> MatchEvents { get; } = new();
 }

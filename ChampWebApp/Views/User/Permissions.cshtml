@@ -1,0 +1,35 @@
+﻿@using ChampWebApp.Utils.Auth
+@using ChampWebApp.Enums
+@{
+    var permissions = Context.User.Claims.FirstOrDefault(c => c.Type == "Permissions")?.Value;
+}
+
+@if (@CheckUserPermissions.HaveAccess((Permissions)Convert.ToInt32(permissions), Permissions.Create))
+{
+    <ul class="list-group justify-content-center">
+        <li class="list-group-item" style="text-align: center;">
+            <a class="btn btn-light text-decoration-none text-primary"
+               style="font-weight: bold; letter-spacing: 0.5px; width: 90%;">View users list</a>
+        </li>
+        <li class="list-group-item" style="text-align: center;">
+            <a class="btn btn-light text-decoration-none text-primary"
+               style="font-weight: bold; letter-spacing: 0.5px; width: 90%;">Create Tournament</a>
+        </li>
+        <li class="list-group-item" style="text-align: center;">
+            <a class="btn btn-light text-decoration-none text-primary"
+               style="font-weight: bold; letter-spacing: 0.5px; width: 90%;">Create Country</a>
+        </li>
+        <li class="list-group-item" style="text-align: center;">
+            <a class="btn btn-light text-decoration-none text-primary"
+               style="font-weight: bold; letter-spacing: 0.5px; width: 90%;">Create Command</a>
+        </li>
+        <li class="list-group-item" style="text-align: center;">
+            <a class="btn btn-light text-decoration-none text-primary"
+               style="font-weight: bold; letter-spacing: 0.5px; width: 90%;">Create new match</a>
+        </li>
+        <li class="list-group-item" style="text-align: center;">
+            <a class="btn btn-light text-decoration-none text-primary"
+               style="font-weight: bold; letter-spacing: 0.5px; width: 90%;">Create new match</a>
+        </li>
+    </ul>
+}

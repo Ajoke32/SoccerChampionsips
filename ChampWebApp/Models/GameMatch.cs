@@ -8,18 +8,23 @@ public class GameMatch
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
+
+    [ForeignKey("HomeCommandId")] public Command HomeCommand { get; set; } = null!;
+
+    [ForeignKey("VisitCommandId")] public Command VisitCommand { get; set; } = null!;
     
-    public Command HomeCommand { get; set; }
-    
-    public Command VisitCommand { get; set; }
-    
-    public int HomeCommandId { get; set; }
-    
-    public int VisitCommandId { get; set; }
-    
-    public DateTime GameTime { get; set; }
-    
-    public List<MatchEvent> MatchEvents { get; set; }
+    public DateTime? GameTime { get; set; }
+
+    [ForeignKey("TournamentId")] public Tournament Tournament { get; set; } = null!;
     
 
+    public ICollection<MatchStatistic> MatchStatistics { get;}
+    
+    public ICollection<MatchEvent> MatchEvents { get; }
+
+    public GameMatch()
+    {
+        MatchEvents = new List<MatchEvent>();
+        MatchStatistics = new List<MatchStatistic>();
+    }
 }

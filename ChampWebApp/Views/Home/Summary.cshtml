@@ -1,0 +1,31 @@
+﻿@model IEnumerable<LeagueSummary>
+
+
+<div>@ViewBag.LeagueName</div>
+
+<table>
+    <tr>
+        <td>Command</td>
+        <td>Wins</td>
+        <td>Draws</td>
+        <td>Loses</td>
+        <td>Goals</td>
+        <td>Goals Difference</td>
+        <td>Goals Against</td>
+        <td>Matches Played</td>
+    </tr>
+    @foreach (var item in @Model)
+    {
+        <tr>
+            <td>@item.Command.Name</td>
+            <td>@item.Wins</td>
+            <td>@item.Draws</td>
+            <td>@item.Loses</td>
+            <td>@item.GoalsFor</td>
+            <td>@item.GoalsDifference</td>
+            <td>@item.GoalsAgainst</td>
+            <td>@item.MatchesPlayed</td>
+        </tr>
+    }
+</table>
+
